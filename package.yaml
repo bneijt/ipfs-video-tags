@@ -1,0 +1,51 @@
+name:                ipfs-video-tags
+version:             0.1.0.0
+github:              "bneijt/ipfs-video-tags"
+license:             GPL3
+author:              "Bram Neijt"
+maintainer:          "bram@neijt.nl"
+copyright:           "2019 Bram Neijt"
+
+extra-source-files:
+- README.md
+
+description:         Please see the README on GitHub at <https://github.com/bneijt/ipfs-video-tags#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- htaglib
+- aeson
+- text
+- Spock
+- mtl
+- wai-middleware-static
+- http-types
+- filepath
+- directory
+- http-client
+- bytestring
+
+library:
+  source-dirs: src
+
+executables:
+  ipfs-video-tags-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - ipfs-video-tags
+
+tests:
+  ipfs-video-tags-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - ipfs-video-tags

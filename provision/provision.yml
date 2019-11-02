@@ -1,0 +1,5 @@
+---
+- hosts: videotagloader
+  become: true
+  roles:
+    - name: videotagloader

@@ -1,0 +1,12 @@
+[Unit]
+Description=videotag
+
+[Service]
+User=videotag
+Group=videotag
+WorkingDirectory=/opt/ipfs-video-tags
+ExecStart=/opt/ipfs-video-tags/start.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

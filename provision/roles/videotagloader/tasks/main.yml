@@ -1,0 +1,40 @@
+---
+- name: Update apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install Haskell
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - haskell-stack
+      - git
+      - build-essential
+      - libtagc0-dev
+      - zlib1g-dev
+
+- name: Make videotag user
+  user:
+    name: videotag
+    shell: /bin/nologin
+    home: /opt/ipfs-video-tags
+
+- name: Upgrade stack
+  command: stack upgrade
+  become: yes
+  become_user: videotag
+  args:
+    chdir: /opt/ipfs-video-tags
+
+- git:
+    repo: 'https://github.com/bneijt/ipfs-video-tags.git'
+    dest: /opt/ipfs-video-tags
+
+- name: Copy systemctl
+  copy:
+    src: videotag.service
+    dest: /etc/systemd/system
+  notify: enable videotag service
