@@ -5,7 +5,7 @@ Description=videotag
 User=videotag
 Group=videotag
 WorkingDirectory=/opt/ipfs-video-tags
-ExecStart=/opt/ipfs-video-tags/start.sh
+ExecStart=/opt/ipfs-video-tags/ipfs-video-tags-exe
 Restart=always
 
 [Install]

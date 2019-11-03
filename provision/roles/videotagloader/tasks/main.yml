@@ -4,17 +4,15 @@
     update_cache: yes
     cache_valid_time: 3600
 
-- name: Install Haskell
+- name: Install packages
   apt:
     name: "{{ packages }}"
     state: present
   vars:
     packages:
-      - haskell-stack
-      - git
       - build-essential
-      - libtagc0-dev
-      - zlib1g-dev
+      - libtagc0
+      - zlib1g
 
 - name: Make videotag user
   user:
@@ -22,16 +20,11 @@
     shell: /bin/nologin
     home: /opt/ipfs-video-tags
 
-- name: Upgrade stack
-  command: stack upgrade
-  become: yes
-  become_user: videotag
-  args:
-    chdir: /opt/ipfs-video-tags
-
-- git:
-    repo: 'https://github.com/bneijt/ipfs-video-tags.git'
+- name: Copy binary
+  copy:
+    src: ipfs-video-tags-exe
     dest: /opt/ipfs-video-tags
+    mode: u=rwx,g=rx,o=rx
 
 - name: Copy systemctl
   copy:

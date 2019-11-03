@@ -2,3 +2,4 @@
 /ipfs-video-tags.cabal
 *~
 /bdist
+/provision/roles/videotagloader/files/ipfs-video-tags-exe
