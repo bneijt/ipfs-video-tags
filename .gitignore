@@ -1,3 +1,4 @@
-.stack-work/
-ipfs-video-tags.cabal
+/.stack-work/
+/ipfs-video-tags.cabal
 *~
+/bdist

@@ -1,0 +1,1 @@
+Build binary for scaleways instance
