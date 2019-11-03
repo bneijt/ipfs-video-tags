@@ -15,7 +15,7 @@ import qualified Data.Text as T
 import qualified Data.Text.Lazy.IO as TIO
 import Data.Aeson.Text (encodeToLazyText)
 import Network.HTTP.Types.Status (notFound404, internalServerError500, badRequest400)
-import System.Directory (doesFileExist)
+import System.Directory (doesFileExist, createDirectoryIfMissing)
 import System.FilePath ((</>))
 import Control.Exception
 
@@ -23,10 +23,11 @@ data MySession = EmptySession
 data MyAppState = DummyAppState (IORef Int)
 
 main :: IO ()
-main =
-    do ref <- newIORef 0
-       spockCfg <- defaultSpockCfg EmptySession PCNoDatabase (DummyAppState ref)
-       runSpock 8081 (spock spockCfg app)
+main = do
+    createDirectoryIfMissing False "tags"
+    ref <- newIORef 0
+    spockCfg <- defaultSpockCfg EmptySession PCNoDatabase (DummyAppState ref)
+    runSpock 8081 (spock spockCfg app)
 
 app :: SpockM () MySession MyAppState ()
 app = do 
